@@ -17,7 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+          <div className="text-pink-400 text-8xl "> OR LODE</div>
+        {children}</body>
     </html>
   );
 }

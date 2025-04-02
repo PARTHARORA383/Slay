@@ -11,6 +11,8 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "@repo/db": "^1.0.0",
     "@repo/ui": "*",
     "next": "^15.2.1",
     "react": "^19.1.0",
