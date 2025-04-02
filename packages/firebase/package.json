@@ -1,0 +1,11 @@
+{
+  "name": "@repo/firebase",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "firebase": "^11.6.0"
+  },
+  "exports": {
+    "./config": "./src/firebase.ts"
+  }
+}

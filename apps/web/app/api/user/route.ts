@@ -2,7 +2,6 @@ import { NextResponse } from "next/server.js";
 import { prisma } from "@repo/db/client";
 
 
-
 export const POST = async () => {
     await prisma.user.create({
         data: {

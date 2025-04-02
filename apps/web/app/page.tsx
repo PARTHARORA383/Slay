@@ -1,7 +1,7 @@
 
 import { Card } from "@repo/ui/card";
 
-
+import { firebaseapp  } from "@repo/firebase/config";
 
 
 export default function Page() {
@@ -9,7 +9,7 @@ export default function Page() {
 
 
     <div>
-      Hi there
+      Dashboard
     </div>
   );
 }
