@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation.js"; 
+import { AuthCard } from "@/app/components/AuthCard.tsx";
 export default function Signin() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter()
+ 
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
   const handleSignin  = async ()=>{
@@ -21,6 +24,7 @@ export default function Signin() {
       )
 
       if(response.status == 200){
+        localStorage.setItem("token" , response.data.token)
         router.push("/");
         console.log(response.data)
       }
@@ -28,45 +32,14 @@ export default function Signin() {
         alert("invalid email and password")
       }
     }catch(e){
-
+      alert("invalid email and password")
     }
   }
 
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-semibold text-center mb-4">Sign in</h2>
-        <form className="space-y-4">
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full text-black p-2 border rounded"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full p-2 border text-black rounded"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <button onClick={handleSignin}
-          type="button"
-            className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition"
-          >
-            Sign in
-          </button>
-        </form>
-        <p className="text-sm text-center mt-4">
-          Already have an account?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">
-            Log in
-          </a>
-        </p>
-      </div>
+      <AuthCard email= {email} password= {password} setEmail={setEmail } setPassword={setPassword} handleSubmit={handleSignin} type="signin"/>
     </div>
   );
 }

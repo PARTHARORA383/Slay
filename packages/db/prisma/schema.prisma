@@ -44,6 +44,25 @@ model OnRampTransaction {
   user      User         @relation(fields: [userId], references: [id])
 }
 
+model Bank_Account {
+  id Int @id @default(autoincrement())
+  UserId String
+  password String
+  bank_balance Int
+  Account_number Int@unique
+  transactions   Bank_transaction[]
+}
+
+
+model Bank_transaction {
+  id               Int    @id @default(autoincrement())
+  userId           String
+  accountNumber    Int
+  startTime DateTime 
+  bankAccount      Bank_Account @relation(fields: [accountNumber], references: [Account_number])
+}
+
+
 enum OnRampStatus {
   Success
   Failure

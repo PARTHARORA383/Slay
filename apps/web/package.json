@@ -16,10 +16,16 @@
     "@repo/firebase": "*",
     "@repo/ui": "*",
     "axios": "^1.8.4",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
+    "firebase-admin": "^13.2.0",
+    "motion": "^12.6.3",
+    "nanoid": "^5.1.5",
     "next": "^15.2.4",
+    "next-auth": "^4.24.11",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^15.2.2",

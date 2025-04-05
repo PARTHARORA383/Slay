@@ -3,9 +3,10 @@
 import {prisma} from "@repo/db/client"
  const app = express();
 
+ app.use(express.json())
  interface prop {
-  token : string ,
-  userId : string ,
+ token : any,
+  userId : any ,
   amount : Number
  }
 
@@ -32,7 +33,10 @@ import {prisma} from "@repo/db/client"
         }),
         prisma.onRampTransaction.updateMany({
             where: {
-                token: paymentInformation.token
+                AND: [
+                    { userId: paymentInformation.userId },
+                    { token: paymentInformation.token }
+                  ]
             }, 
             data: {
                 status: "Success",
@@ -41,12 +45,17 @@ import {prisma} from "@repo/db/client"
     ]);
 
     res.json({
-        message: "Captured"
+        message: "Captured",
     })
 } catch(e) {
     console.error(e);
     res.status(411).json({
+     
         message: "Error while processing webhook"
     })
 }
  })
+
+ app.listen(5000, () => {
+    console.log("🚀 Server listening on port 5000");
+});

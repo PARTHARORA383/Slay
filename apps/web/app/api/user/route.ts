@@ -15,7 +15,7 @@ export const POST = async () => {
 }
 
 export const GET = async ()=>{
-const users = await prisma.user.findMany()
+const users = await prisma.onRampTransaction.findMany()
 
 return NextResponse.json({
   users
