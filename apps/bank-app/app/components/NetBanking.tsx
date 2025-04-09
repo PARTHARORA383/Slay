@@ -8,6 +8,7 @@ const NetbankingPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter()
+
   
   const handleclick = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,13 +42,11 @@ const NetbankingPage = () => {
 
         {/* 🟡 Notice */}
         <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 text-sm rounded-md mb-6">
-          <strong>Note:</strong> This is a mock NetBanking login page and not connected to any real bank. In real scenarios, you would use your official Customer ID and password provided by your bank. Also this userid and password is  <span className='font-bold'> unique</span> for every user so no other user can make payments from your account
-          <br />
-          For demo purposes, use:
-          <ul className="list-disc ml-5 mt-2">
-            <li>User ID: <code className='font-bold'>demoUser</code></li>
-            <li>Password: <code className='font-bold'>password123</code></li>
-          </ul>
+          <strong>Note:</strong> This is a mock NetBanking login page and not connected to any real bank. In real scenarios, you would use your official Customer ID and Password , Here Please Signup/login to create your bank account. 
+          <p className='font-bold'> P.S - Remember Your Login Credentials as you remember your bank credentials</p>
+      
+    
+
         </div>
 
         {/* Login Title */}
@@ -83,7 +82,7 @@ const NetbankingPage = () => {
         <button onClick={handleclick}
           className="bg-blue-700 rounded-md text-neutral-100 p-2.5 w-2/3 mt-8 hover:bg-blue-800 transition-transform duration-300"
         >
-          Login
+          Login 
         </button>
     
       </div>

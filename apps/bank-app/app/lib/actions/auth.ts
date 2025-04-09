@@ -1,6 +1,7 @@
 import { prisma } from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
+import Email from "next-auth/providers/email";
 
 export const authOptions = {
     providers: [
@@ -13,6 +14,7 @@ export const authOptions = {
           // TODO: User credentials type from next-aut
           async authorize(credentials: any) {
             // Do zod validation, OTP validation here
+            console.log(credentials.email)
             const hashedPassword = await bcrypt.hash(credentials.password, 10);
             const existingUser = await prisma.bank_Account.findFirst({
                 where: {
@@ -22,32 +24,43 @@ export const authOptions = {
 
             if (existingUser) {
                 const passwordValidation = await bcrypt.compare(credentials.password, existingUser.password);
+
+              
                 if (passwordValidation) {
+       
+
                     return {
                         id: existingUser.id.toString(),
-
-                        email: existingUser.UserId
+                        UserId : existingUser.UserId,
+                        Account_number : existingUser.Account_number,
+                        balance : existingUser.bank_balance
                     }
                 }
                 return null;
             }
 
             try {
+
+                const random = Math.floor(Math.random() * 100000).toString().padStart(7 , "0");
+                console.log(random , "this is the random num")
+
                 const user = await prisma.bank_Account.create({
                     data: {
                         UserId: credentials.email,
                         password: hashedPassword,
                         bank_balance : 100000,
-                        Account_number :2467854
+                        Account_number : parseInt(`001${random}`)
                     }
                 });
             
                 return {
                     id: user.id.toString(),
-                    email: user.UserId
+                  UserId : user.UserId,
+                        account_number : user.Account_number,
+                        balance : user.bank_balance
                 }
             } catch(e) {
-                console.error(e);
+                console.error(e.message);
             }
 
             return null
@@ -58,13 +71,23 @@ export const authOptions = {
     pages: {
         signIn: "/Auth/signin" 
       },
-    // callbacks: {
-    //     TODO: can u fix the type here? Using any is bad
-    //     async session({ token, session }: any) {
-    //         session.user.id = token.sub
+    callbacks: {
+        async jwt({ token, user }:any) {
+        
 
-    //         return session
-    //     }
-    // }
+            if (user) {
+              token.UserId = user.UserId;
+              token.Account_number = user.Account_number;
+              token.balance = user.balance;
+            }
+            return token;
+          },
+          async session({ token, session }:any) {
+            session.user.id = token.UserId;
+            session.user.Account_number = token.Account_number;
+            session.user.balance = token.balance;
+            return session;
+          }
+    }
   }
  

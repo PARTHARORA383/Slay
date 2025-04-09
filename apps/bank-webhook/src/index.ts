@@ -10,8 +10,8 @@ import {prisma} from "@repo/db/client"
  app.use(cors())
  interface prop {
  token : any,
-  userId : any ,
-  amount : Number
+  userId : string ,
+  amount : string
  }
 
  app.post("/bankWebhook" , async (req , res)=>{
@@ -31,14 +31,14 @@ import {prisma} from "@repo/db/client"
             data: {
                 amount: {
                     // You can also get this from your DB
-                    increment: Number(paymentInformation.amount)
+                    increment: parseInt(paymentInformation.amount)
                 }
             }
         }),
         prisma.onRampTransaction.updateMany({
             where: {
                 AND: [
-                    { userId: paymentInformation.userId },
+                    { userId: parseInt(paymentInformation.userId) },
                     { token: paymentInformation.token }
                   ]
             }, 

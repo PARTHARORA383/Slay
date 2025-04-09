@@ -45,17 +45,6 @@ export const POST = async ( req : NextRequest , res : NextResponse)=>{
     
     if(create_user_in_localdb){
 
-      const create_a_bankaccount = await prisma.bank_Account.create({
-
-        data :{
-          UserId : Bank_userid  ,
-          password : bank_password,
-          bank_balance  : 100001,
-          Account_number 
-        }
-      })
-      console.log("bank-account is" + create_a_bankaccount)
-
       const create_a_0_balance = await prisma.balance.create({
         data : {
           userId : create_user_in_localdb.id ,

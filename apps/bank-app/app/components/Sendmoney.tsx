@@ -1,36 +1,69 @@
 "use client"
 import axios from "axios"
+import { useState } from "react"
 
 interface prop {
   amount : Number,
   account_number : string ,
   userId : Number ,
-  token : string
+  token : string,
+  CustomerId : string
 }
 
 
 
 
 
-export const SendMoney = ({amount , account_number  , userId , token }:prop)=>{
+ export const SendMoney = ({amount , account_number  , userId , token ,CustomerId }:prop)=>{
+
+  const [loading , setLoading] = useState(false)
 
 
   
-
+  
   const handleclick = async ()=>{
 
-    const response = await axios.post("http://localhost:5000/bankWebhook" ,{
-    userId ,
-      token ,
-      amount
-    })
-   
-      alert("payment made")
-      window.location.href = "http://localhost:3000"
+
+    try{
+      setLoading(true)
+      const bank_confirm = await axios.post("http://localhost:3001/api/confirm" ,{
+        amount      ,
+        account_number
+      }
+    )
     
-
+    if(bank_confirm.status == 200){
+      
+      
+      const response = await axios.post("http://localhost:5000/bankWebhook" ,{
+        userId ,
+        token ,
+        amount
+      })
+      setLoading(false)
+      alert("payment made")
+      window.location.href = "http://localhost:3000" 
+      
+    }
+    
+  }catch(e){
+    
+    alert("Payment failed. Please try again.");
   }
+  finally{
+    setLoading(false)
+  }
+}
 
+if(loading){
+  return <div className=" z-20 fixed inset-0 h-screen w-screen bg-black  opacity-30  flex justify-center items-center">
+    <div className="w-[70px] h-[50px] bg-neutral-100 flex justify-center items-center rounded-lg">
+     
+    <div className="w-10 h-10 border-4 border-blue-900 border-t-transparent rounded-full animate-spin"></div>
+
+    </div>
+  </div>
+}
 
 
   return <div className="bg-white w-full h-full  shadow-lg p-5 rounded-lg  ">
