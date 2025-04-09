@@ -2,8 +2,12 @@
  import express from "express"
 import {prisma} from "@repo/db/client"
  const app = express();
+ import cors from "cors";
 
+ 
+ 
  app.use(express.json())
+ app.use(cors())
  interface prop {
  token : any,
   userId : any ,
@@ -22,7 +26,7 @@ import {prisma} from "@repo/db/client"
     await prisma.$transaction([
         prisma.balance.updateMany({
             where: {
-                userId: Number(paymentInformation.userId)
+                userId: parseInt(paymentInformation.userId)
             },
             data: {
                 amount: {

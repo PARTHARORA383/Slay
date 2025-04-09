@@ -59,6 +59,7 @@ model Bank_transaction {
   userId           String
   accountNumber    Int
   startTime DateTime 
+  status    OnRampStatus
   bankAccount      Bank_Account @relation(fields: [accountNumber], references: [Account_number])
 }
 

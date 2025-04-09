@@ -21,11 +21,12 @@ export  const AddMoney  = ({handleclick}:any)=> {
         localStorage.setItem("transaction_token" , transaction_token)
 
             const userId = '5';
+            
           
             // Create a form element
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = 'https://example-bank.com/netbanking/auth'; // Replace with the bank's actual URL
+            form.action = 'http://localhost:3001/api/transfer'; // Replace with the bank's actual URL
           
             // Create input elements for each parameter
             const inputs = [
@@ -51,7 +52,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
 
 
         createOnRampTransaction(provider  , Number(amount) , transaction_token)
-        window.location.href = "http://localhost:3001/Dummybank/Auth";
+     
 
         
     }
@@ -71,9 +72,9 @@ export  const AddMoney  = ({handleclick}:any)=> {
             setProvider(e.target.value)
         }} >
         
-  <option value="" disabled selected hidden>
-    Choose a payment method
-  </option>
+        <option value="" disabled selected hidden>
+        Choose a payment method
+        </option>
 
       
             <option value = "DummybankHook">Dummy Bank Server </option>

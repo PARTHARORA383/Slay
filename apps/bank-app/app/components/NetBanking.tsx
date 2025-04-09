@@ -1,11 +1,29 @@
 "use client";
 
 import React, { useState } from 'react';
-
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const NetbankingPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter()
+  
+  const handleclick = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      email : username,
+      password
+    });
+
+    if (res?.ok) {
+      router.push("/TransferMoney"); // or any protected page
+    } else {
+      alert("Invalid credentials");
+    }
+  };
 
   return (
     <div className="h-screen w-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 grid grid-cols-2">
@@ -62,7 +80,7 @@ const NetbankingPage = () => {
         </div>
 
         {/* Login Button */}
-        <button
+        <button onClick={handleclick}
           className="bg-blue-700 rounded-md text-neutral-100 p-2.5 w-2/3 mt-8 hover:bg-blue-800 transition-transform duration-300"
         >
           Login

@@ -4,21 +4,29 @@ import axios from "axios"
 interface prop {
   amount : Number,
   account_number : string ,
-  userid : string ,
+  userId : Number ,
   token : string
 }
 
-export const SendMoney = ({amount , account_number , userid , token }:prop)=>{
+
+
+
+
+export const SendMoney = ({amount , account_number  , userId , token }:prop)=>{
+
+
+  
 
   const handleclick = async ()=>{
 
     const response = await axios.post("http://localhost:5000/bankWebhook" ,{
-      userid ,
+    userId ,
       token ,
       amount
     })
-
-
+   
+      alert("payment made")
+      window.location.href = "http://localhost:3000"
     
 
   }
