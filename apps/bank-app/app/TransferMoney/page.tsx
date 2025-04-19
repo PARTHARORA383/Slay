@@ -1,6 +1,4 @@
 
-export const dynamic = 'force-dynamic';
-
 
 
 import { cookies } from 'next/headers';
@@ -8,7 +6,11 @@ import { Card } from '../components/Balance';
 import { SendMoney } from '../components/Sendmoney';
 import { getServerSession } from "next-auth";
 import { authOptions } from '../lib/actions/auth';
-import { redirect } from 'next/navigation'; 
+import { redirect } from 'next/navigation';
+
+
+
+
 export default async function TransferMoney() {
   
 const session = await getServerSession(authOptions);
@@ -20,11 +22,9 @@ if(!session){
 
 const cookieStore = cookies();
 const txn = cookieStore.get('txn_session');
-console.log("Raw txn cookie:", txn?.value);
 
-  if (!txn) {
-    return <div className="text-red-500">Session expired. Please retry.</div>;
-  }
+
+
 
   const { userId, amount, transaction_token } = JSON.parse(txn.value);
 

@@ -33,8 +33,6 @@ interface prop {
     )
     
     if(bank_confirm.status == 200){
-      
-      
       const response = await axios.post("http://localhost:5000/bankWebhook" ,{
         userId ,
         token ,
@@ -42,7 +40,7 @@ interface prop {
       })
       setLoading(false)
       alert("payment made")
-      window.location.href = "http://localhost:3000" 
+      window.location.href = "http://localhost:3000/Dashboard" 
       
     }
     

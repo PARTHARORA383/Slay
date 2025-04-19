@@ -40,7 +40,6 @@ export const authOptions = {
             }
 
             try {
-
                 const random = Math.floor(Math.random() * 100000).toString().padStart(7 , "0");
                 console.log(random , "this is the random num")
 
@@ -54,13 +53,13 @@ export const authOptions = {
                 });
             
                 return {
-                    id: user.id.toString(),
-                  UserId : user.UserId,
-                        account_number : user.Account_number,
+                        id: user.id.toString(),
+                        UserId : user.UserId,
+                        Account_number : user.Account_number,
                         balance : user.bank_balance
                 }
             } catch(e) {
-                console.error(e.message);
+                console.error("Error authorizing user");
             }
 
             return null

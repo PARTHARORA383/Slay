@@ -5,11 +5,11 @@ export const Sidebar = ()=>{
 
   const router = useRouter( )
 return <div>
-  <div className="bg-neutral-900  h-screen fixed border-r-2 border-neutral-800 lg:w-[250px] ">
+  <div className="bg-neutral-900 lg:h-screen lg:fixed border-r-2 border-neutral-800 lg:w-[250px] ">
 
     <div className= "max-w-full mt-6 ml-6 mr-6 p-3 " 
     onClick={()=>{
-      router.replace("/")
+      router.replace("/Dashboard")
     }}>
      <h1 className="text-neutral-200 text-md hover:text-purple-500 cursor-pointer">
       Dashboard
