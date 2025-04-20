@@ -13,12 +13,3 @@ export const POST = async () => {
         message: "hi there"
     })
 }
-
-export const GET = async ()=>{
-const users = await prisma.onRampTransaction.findMany()
-
-return NextResponse.json({
-  users
-})
-
-}

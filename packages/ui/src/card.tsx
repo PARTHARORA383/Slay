@@ -18,7 +18,7 @@ export function Card({
       animate={{ opacity: 1, y: 0  , boxShadow: "0px 4px 10px rgba(139, 92, 246, 0.2)"}}
 
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="relative p-6 bg-gradient-to-br from-neutral-800 to-neutral-900 w-[800px] rounded-2xl shadow-lg border border-neutral-700" 
+      className="relative p-6 bg-gradient-to-br from-neutral-800 to-neutral-900  rounded-2xl shadow-lg border border-neutral-700" 
       onFocus={()=>setIsTyping(true)}
       onBlur={()=>setIsTyping(false)}>
         

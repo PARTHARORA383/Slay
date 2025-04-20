@@ -9,6 +9,7 @@ import { Button } from "@repo/ui/button";
 import {Alertbox} from "@repo/ui/alert"
 import { createOnRampTransaction } from "../lib/actions/createOnRamptransaction.ts";
 import { useRouter } from "next/navigation.js";
+import {Loader} from "@repo/ui/loader"
 
 
 
@@ -19,6 +20,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
     const [provider, setProvider] = useState("");
     const[ details , setDetails] = useState(false);
     const[showalert , setShowAlert] = useState(false);
+    const[showloader , setShowLoader] = useState(false);
 
     const router = useRouter();
 
@@ -33,29 +35,34 @@ export  const AddMoney  = ({handleclick}:any)=> {
 
     const handleonclick = ()=>{
 
+        try{
+    
+            if(details == false){
+                setShowAlert(true);
+            }
+            else{
+                setShowLoader(true);
+                const transaction_token = (Math.random() * 1000).toString();
+                localStorage.setItem("transaction_token" , transaction_token)
 
-        if(details == false){
-        setShowAlert(true);
-        }
-        else{
-
-            const transaction_token = (Math.random() * 1000).toString();
-            localStorage.setItem("transaction_token" , transaction_token)
-            router.push('/redirecting')
-            
-            
-            const userId = '5';
-            
-            
-            
-            const form = document.createElement('form');
-            
-            setTimeout(() => {
+                setTimeout(() => {
+                router.push('/redirecting')
+                setShowLoader(false);   
+            }, 2000);
                 
-                form.method = 'POST';
-                form.action = 'http://localhost:3001/api/transfer';    
                 
-                const inputs = [
+                const userId = '5';
+                
+                
+                
+                const form = document.createElement('form');
+                
+                setTimeout(() => {
+                    
+                    form.method = 'POST';
+                    form.action = 'http://localhost:3001/api/transfer';    
+                    
+                    const inputs = [
                     { name: 'userId', value: userId },
                     { name: 'transaction_token', value: transaction_token },
                     { name: 'amount', value: amount }
@@ -74,18 +81,27 @@ export  const AddMoney  = ({handleclick}:any)=> {
                 
             }, 4000);
             createOnRampTransaction(provider  , Number(amount) , transaction_token)
-            
+
         }
 
-        
+    } catch(e){
+
+    }
+    finally{
+
+    }
     }
     
       
-    return <Card title="Add Money">
-    
+    return<div className="max-w-4xl pr-7 ">
+
+    <Card title="Add Money">
+    {showloader && (
+        <Loader label="Loading"/>
+    )}
     {showalert && (
-            <Alertbox label="Please Enter the amount and select bank provider"/>
-        )}
+        <Alertbox label="Please Enter the amount and select bank provider"/>
+    )}
     <div className="w-full">
         <TextInput label={"Amount"} placeholder={"Enter the amount"} type={"number"} onChange={(value) => {
             setAmount(value)
@@ -114,4 +130,5 @@ export  const AddMoney  = ({handleclick}:any)=> {
         </div>
     </div>
 </Card>
+            </div> 
 }
