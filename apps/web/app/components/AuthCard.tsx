@@ -12,11 +12,11 @@ interface AuthCardProps {
   setEmail: (email: string) => void;
   setPassword: (password: string) => void;
   handleSubmit: () => void;
-  type: "signin" | "signup"; // 🔥 Control Sign In or Sign Up
+  type: "signin" | "signup";
 }
 
 export const AuthCard = ({ email, password, setEmail, setPassword, handleSubmit, type }: AuthCardProps) => {
-  const isSignup = type === "signup"; // 🔥 Determine if it's Sign Up
+  const isSignup = type === "signup"; 
 
   return (
     <div className="bg-neutral-900 h-screen w-1/2">
@@ -61,7 +61,6 @@ export const AuthCard = ({ email, password, setEmail, setPassword, handleSubmit,
             placeholder="Enter your password" 
           />
 
-          {/* 🔥 Dynamic Button Label */}
           <button 
             type="button" 
             onClick={handleSubmit}  

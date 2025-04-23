@@ -11,7 +11,7 @@ export const Button =({
 
 
 
-  return<div  onClick= {handleclick}className="bg-gradient-to-tr from-neutral-900 to-neutral-950 rounded-md w-[190px] flex justify-center items-center hover:bg-gradient-to-bl duration-500 cursor-pointer text-lg p-2.5 hover:opacity-70">
+  return<div  onClick= {handleclick}className="bg-gradient-to-tr from-neutral-900 to-neutral-950 rounded-md w-[190px] flex justify-center items-center hover:bg-gradient-to-bl duration-500 cursor-pointer text-lg p-1.5 hover:opacity-70">
     {label}
       </div>
 }

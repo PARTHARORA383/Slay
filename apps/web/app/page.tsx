@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@repo/ui/card";
-import { Authonchange } from "./lib/actions/Authonchange.ts";
+import { Authonchange } from "./lib/Auth.ts";
 import { auth } from "@repo/firebase/config";
 
 export default function Page() {

@@ -93,7 +93,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
     }
     
       
-    return<div className="max-w-4xl pr-7 ">
+    return<div className=" max-w-screen p-5 lg:p-0 lg:max-w-4xl  ">
 
     <Card title="Add Money">
     {showloader && (
@@ -110,7 +110,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
     <div className="mt-5 text-md">
         Bank Provider
     </div>
-        <select className=" w-full h-10 rounded-md text-gray-900 p-2.5"
+        <select className="w-full h-10 rounded-md text-gray-900 p-2.5"
         onChange={(e)=>{
             setProvider(e.target.value)
         }} >
@@ -125,7 +125,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
         </select>
 
 
-        <div className="flex justify-center pt-4">
+        <div className="flex justify-center pt-8">
         <Button label="Add Money" handleclick={handleonclick} />
         </div>
     </div>

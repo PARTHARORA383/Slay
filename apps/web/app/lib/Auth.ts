@@ -2,6 +2,7 @@ import { prisma } from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
 import Email from "next-auth/providers/email";
+import { emit } from "process";
 
 export const authOptions = {
     providers: [
@@ -17,9 +18,9 @@ export const authOptions = {
 
           
             const hashedPassword = await bcrypt.hash(credentials.password, 10);
-            const existingUser = await prisma.bank_Account.findFirst({
+            const existingUser = await prisma.user.findFirst({
                 where: {
-                    UserId: credentials.email
+                    email: credentials.email
                 }
             });
 
@@ -29,35 +30,30 @@ export const authOptions = {
               
                 if (passwordValidation) {
        
-
+                    console.log(existingUser.id)
                     return {
                         id: existingUser.id.toString(),
-                        UserId : existingUser.UserId,
-                        Account_number : existingUser.Account_number,
-                        balance : existingUser.bank_balance
+                        email : existingUser.email
                     }
                 }
                 return null;
             }
 
             try {
-                const random = Math.floor(Math.random() * 100000).toString().padStart(7 , "0");
-                console.log(random , "this is the random num")
+              
 
-                const user = await prisma.bank_Account.create({
+                const user = await prisma.user.create({
                     data: {
-                        UserId: credentials.email,
+                          email : credentials.email,
                         password: hashedPassword,
-                        bank_balance : 100000,
-                        Account_number : parseInt(`001${random}`)
+                        name : credentials.email
                     }
                 });
             
                 return {
                         id: user.id.toString(),
-                        UserId : user.UserId,
-                        Account_number : user.Account_number,
-                        balance : user.bank_balance
+                        email : user.email
+
                 }
             } catch(e) {
                 console.error("Error authorizing user");
@@ -69,26 +65,26 @@ export const authOptions = {
     ],
     secret: process.env.NEXTAUTH_SECRET,
     pages: {
-        signIn: "/Auth/signin" 
+        signIn: "/Auth/Signup" 
       },
-    callbacks: {
-        async jwt({ token, user }:any) {
+    // callbacks: {
+    //     async jwt({ token, user }:any) {
         
 
-            if (user) {
-              token.UserId = user.UserId;
-              token.Account_number = user.Account_number;
-              token.balance = user.balance;
-            }
-            return token;
-          },
+    //         if (user) {
+    //           token.UserId = user.UserId;
+    //           token.Account_number = user.Account_number;
+    //           token.balance = user.balance;
+    //         }
+    //         return token;
+    //       },
           
-          async session({ token, session }:any) {
-            session.user.id = token.UserId;
-            session.user.Account_number = token.Account_number;
-            session.user.balance = token.balance;
-            return session;
-          }
-    }
+    //       async session({ token, session }:any) {
+    //         session.user.id = token.UserId;
+    //         session.user.Account_number = token.Account_number;
+    //         session.user.balance = token.balance;
+    //         return session;
+    //       }
+    // }
   }
  

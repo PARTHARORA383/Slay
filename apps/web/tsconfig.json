@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "preserve",
     "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
     "plugins": [
       {
         "name": "next"
@@ -10,9 +11,11 @@
     ],
     "allowJs": true,
     "noEmit": true,
-    "baseUrl": ".", 
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
@@ -26,4 +29,3 @@
     "node_modules"
   ]
 }
-
