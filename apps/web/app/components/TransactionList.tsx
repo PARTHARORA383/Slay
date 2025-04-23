@@ -11,7 +11,7 @@ export function TransactionList() {
   const [filterTransactions, setFilterTransactions] = useState([])
   const [search, setSearch] = useState("")
   const [loading, setLoading] = useState(false);
-
+  const [selected , setSelected] = useState('')
 
 
 
@@ -76,27 +76,46 @@ export function TransactionList() {
 
         <div className="flex items-center bg-neutral-800 rounded-md  py-0.5 ml-5">
 
-          <div className="text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600" onClick={() => {
-
-            setSearch("")
+        <div
+  className={`text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600 ${
+    selected === "All" ? "bg-neutral-700 " : ""
+  }`}
+  onClick={() => {
+    setSelected("All");
+    setSearch("");
+  }}
+>
+  All
+</div>
+          <div className={`text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600 ${selected === 'Recieved' ? "bg-neutral-700" : ""} `} onClick={()=>{
+            setSelected("Recieved")
+            setSearch('Recieved')
           }}>
-            All
-          </div>
-          <div className="text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600">
             Recieved
           </div>
-          <div className="text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600" onClick={() => {
+          <div
+  className={`text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600 ${
+    selected === "Success" ? "bg-neutral-700 font-semibold" : ""
+  }`}
+  onClick={() => {
+    setSelected("Success");
+    setSearch("Success");
+  }}
+>
+  Success
+</div>
 
-            setSearch("Success")
-          }}>
-            Success
-          </div>
-          <div className="text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600" onClick={() => {
-
-            setSearch("Processing")
-          }}>
-            Processing
-          </div>
+<div
+  className={`text-neutral-100 text-md px-5 py-1 hover:bg-neutral-600 rounded-lg transition-transform duration-300 cursor-pointer border-r-2 border-opacity-30 border-neutral-600 ${
+    selected === "Processing" ? "bg-neutral-700 font-semibold" : ""
+  }`}
+  onClick={() => {
+    setSelected("Processing");
+    setSearch("Processing");
+  }}
+>
+  Processing
+</div>
 
         </div>
       </div>
@@ -161,14 +180,14 @@ export function TransactionList() {
       <div className="text-sm w-full max-w-screen">
         {filterTransactions.map((transaction) => (
           <div
-            className="grid grid-cols-5 gap-4 border-b border-neutral-700 p-3 text-neutral-100"
+            className="grid grid-cols-5 gap-4 border-b border-neutral-700 p-3 text-neutral-100 hover:bg-neutral-800 bg-opacity-70 transition-transform duration-300 cursor-pointer"
             key={transaction.id}
           >
             <div className="truncate">{transaction.amount}</div>
             <div className="truncate">{transaction.provider}</div>
             <div className="truncate">Netbanking</div>
             <div className="truncate">{transaction.status}</div>
-            <div className="truncate">{transaction.startTime}</div>
+            <div className="truncate"> {new Date(transaction.startTime).toISOString().split("T")[0]}</div>
           </div>
         ))}
       </div>
