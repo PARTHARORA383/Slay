@@ -3,9 +3,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation.js";
+import Image from "next/image.js";
+
 import {AuthCard} from "../../components/AuthCard.tsx";
 import { signIn } from 'next-auth/react';
+
 import { NextResponse } from "next/server.js";
+
 
 
 export default function Signup() {
@@ -38,8 +42,20 @@ export default function Signup() {
   
 
   return (
-    <div className="flex min-h-screen items-center bg-gray-100">
+    <div className="  grid grid-cols-2 bg-gray-100">
+    
+       
+      <div className="col-span-2 lg:col-span-1">
+
       <AuthCard email={email} password={password} setEmail={setEmail} setPassword={setPassword} handleSubmit={handleSignup}  type="signup"/>
+      </div>
+   
+           
+      <div className="col-span-1 hidden lg:block bg-neutral-900">
+      <img   src="/image/mythical-dragon-beast-anime-style.jpg"
+  alt="Mythical Dragon" className="max-h-screen min-h-screen "/>
+      </div>
+    
     </div>
   );
 }
