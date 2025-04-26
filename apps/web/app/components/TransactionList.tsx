@@ -12,7 +12,7 @@ export function TransactionList() {
   const [search, setSearch] = useState("")
   const [loading, setLoading] = useState(false);
   const [selected , setSelected] = useState('')
-
+  
 
 
   const filterCallback = (transaction: any) => {
@@ -161,11 +161,12 @@ export function TransactionList() {
       <div
         className="grid grid-cols-5 gap-4 py-2 px-3 text-neutral-100"
       >
+        <div className="truncate"></div>
         <div className="truncate">Amount</div>
         <div className="truncate"> Provider</div>
         <div className="truncate"> Payment Method</div>
         <div className="truncate">Status</div>
-        <div className="truncate">Date</div>
+      
       </div>
 
 
@@ -182,12 +183,14 @@ export function TransactionList() {
           <div
             className="grid grid-cols-5 gap-4 border-b border-neutral-700 p-3 text-neutral-100 hover:bg-neutral-800 bg-opacity-70 transition-transform duration-300 cursor-pointer"
             key={transaction.id}
-          >
+          >   
+            
+            <div className="truncate w-10 h-10 rounded-full flex justify-center items-center bg-gradient-to-r from-purple-900 to-purple-950">S</div>
             <div className="truncate">{transaction.amount}</div>
             <div className="truncate">{transaction.provider}</div>
             <div className="truncate">Netbanking</div>
             <div className="truncate">{transaction.status}</div>
-            <div className="truncate"> {new Date(transaction.startTime).toISOString().split("T")[0]}</div>
+            {/* <div className="truncate"> {new Date(transaction.startTime).toISOString().split("T")[0]}</div> */}
           </div>
         ))}
       </div>

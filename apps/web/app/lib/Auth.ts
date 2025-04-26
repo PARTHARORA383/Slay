@@ -42,6 +42,14 @@ export const authOptions = {
             },
           });
 
+          const balance = await prisma.balance.create({
+            data: {
+              amount : 0 ,
+              userId : user.id ,
+              locked : 0
+            },
+          });
+
           return { id: user.id.toString(), email: user.email };
         } catch (e) {
           console.error("Error authorizing user", e);
@@ -57,24 +65,6 @@ export const authOptions = {
   },
 };
 
-    // callbacks: {
-    //     async jwt({ token, user }:any) {
-        
-
-    //         if (user) {
-    //           token.UserId = user.UserId;
-    //           token.Account_number = user.Account_number;
-    //           token.balance = user.balance;
-    //         }
-    //         return token;
-    //       },
-          
-    //       async session({ token, session }:any) {
-    //         session.user.id = token.UserId;
-    //         session.user.Account_number = token.Account_number;
-    //         session.user.balance = token.balance;
-    //         return session;
-    //       }
-    // }
+    
   
  
