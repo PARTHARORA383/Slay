@@ -2,7 +2,6 @@
 
 
 
-import Link from "next/link.js";
 import GoogleButton from "./GoogleButton.tsx";
 
 
@@ -19,7 +18,7 @@ export const AuthCard = ({ email, password, setEmail, setPassword, handleSubmit,
   const isSignup = type === "signup"; 
 
   return (
-    <div className="bg-neutral-900 h-full w-full  lg:p-4 pt-20 p-5">
+    <div className="bg-neutral-900 h-full w-full  lg:p-4 lg:pt-10 pt-20 p-5">
       <div className="flex flex-col lg:mt-16 lg:ml-10">
         <h1 className="text-2xl lg:text-3xl text-neutral-100 font-medium">
           {isSignup ? "Welcome to Slay !" : "Welcome Back"}

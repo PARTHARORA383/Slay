@@ -18,6 +18,7 @@ export default function Signup() {
 
   const router = useRouter()
   const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  
   const handleSignup = async () => {
     try {
       const res = await signIn("credentials", {

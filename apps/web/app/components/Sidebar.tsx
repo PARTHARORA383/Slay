@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter  } from "next/navigation.js"
+import { Logout } from "./Logout.tsx"
 export const Sidebar = ()=>{
 
   const router = useRouter( )
@@ -23,7 +24,11 @@ return <div>
       Transfer Money
       </h1>
     </div>
+    <div className= "max-w-full  ml-6 mr-6 p-3 ">
+    <Logout/>
+    </div>
 
+      
   </div>
 </div>
 
