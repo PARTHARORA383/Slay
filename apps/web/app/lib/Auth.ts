@@ -2,6 +2,7 @@ import { prisma } from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
+
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -10,7 +11,7 @@ export const authOptions = {
         email: { label: "Email", type: "text", placeholder: "User@email.com" },
         password: { label: "Password", type: "password", placeholder: "PassWxxxx" },
       },
-      async authorize(credentials: any) {
+      async authorize(credentials: any){
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Email and Password are required");
         }
@@ -25,9 +26,12 @@ export const authOptions = {
             existingUser.password
           );
 
+          console.log("Password Validated: ", passwordValidation);
           if (passwordValidation) {
+          
             return { id: existingUser.id.toString(), email: existingUser.email };
           }
+
           return null;
         }
 
@@ -41,6 +45,8 @@ export const authOptions = {
               name: credentials.email,
             },
           });
+   
+    
 
           const balance = await prisma.balance.create({
             data: {
@@ -62,6 +68,22 @@ export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/Auth/Signup",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.email = token.email;
+      }
+      return session;
+    },
   },
 };
 

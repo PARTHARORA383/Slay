@@ -30,6 +30,7 @@ export default function Signup() {
       console.log("this is the response " , res);
   
       if (res?.ok) {
+       
         router.push("/Dashboard");
       } else {
         console.error("Login failed", res?.error);
