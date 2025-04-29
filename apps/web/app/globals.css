@@ -9,3 +9,13 @@ background-color:rgb(23, 23, 23)
 
 }
 
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    @apply appearance-none m-0;
+  }
+
+  input[type="number"] {
+    @apply appearance-none; /* for Firefox */
+  }
+}
