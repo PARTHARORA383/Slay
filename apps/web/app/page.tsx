@@ -1,7 +1,7 @@
 "use client";
 
 import { Card } from "@repo/ui/card";
-import { Authonchange } from "./lib/Auth.ts";
+
 import { auth } from "@repo/firebase/config";
 
 export default function Page() {
@@ -9,15 +9,6 @@ export default function Page() {
 
   
 
-  const { isAuthenticated } = Authonchange(); 
-
-  if(!isAuthenticated){
-    return(
-      <div>
-        Loading........
-      </div>
-    )
-  }
   return (
     <div>
       <h1>Dashboard</h1>

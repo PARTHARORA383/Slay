@@ -17,7 +17,7 @@ export function Alertbox({ label }: { label: string }) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: -100, opacity: 0 }}
           transition={{ duration: 0.4 }}
-          className="fixed top-6 left-1/2 transition-transform duration-300 ease-in -translate-x-1/2 z-10"
+          className="fixed top-6 left-1/2 transition-transform duration-300 ease-in -translate-x-1/2 z-20"
         >
           <div className="p-4 text-sm rounded-lg bg-neutral-800 text-red-500 shadow-lg">
             <span className="font-medium">Alert!</span> {label}
