@@ -19,14 +19,21 @@ export const Paymoney = () => {
   const [loading, setLoading] = useState(false);
   const [confirmation, setConfirmation] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [alertbox, setAlertbox] = useState(false);
+  const [alertboxservererror, setAlertboxservererror] = useState(false);
+  const [alertboxselftransfer, setAlertboxselftransfer] = useState(false);
+  
   const p2p_userId = searchParams.get("userId"); //
 
+  const user_name = localStorage.getItem("user_name")
 
   const handlePaymoney = async () => {
 
-    if(!amount){
-      return <Alertbox label="Please Enter an amount"/>
+    if(!amount ){
+      setAlertbox(true);
+      return ;
     }
+
 
     setLoading(true);
 
@@ -39,7 +46,7 @@ export const Paymoney = () => {
         }
 
         const requestbody = {
-          user1: "5",
+          user1: session?.user.id,
           user2: p2p_userId,
           amount: amount
         }
@@ -53,8 +60,21 @@ export const Paymoney = () => {
           setConfirmation(true)
           setLoading(false)
         }
-      } catch (e) {
+        if (response?.status == 500) {
+          setLoading(false)
+          setAlertboxservererror(true)
+        }
+        if (response?.status == 404) {
+          setLoading(false)
+          setAlertboxselftransfer(true)
+        }
 
+     
+      } catch (e) {
+        setLoading(false)
+        setConfirmation(false)
+
+        
       }
     }, 5000);
   }
@@ -62,22 +82,29 @@ export const Paymoney = () => {
 
 
   if (loading) {
-    return <PaymentLoader amount={amount || 0} receiver="Parth" />
+    return <PaymentLoader amount={amount || 0} receiver={user_name || ""} />
   }
+ 
 
 
   if (confirmation) {
-    return <PaymentComplete amount={amount || 0} reciever="Parth" userid={p2p_userId || ""} />
+    return <PaymentComplete amount={amount || 0} reciever={user_name || ""} userid={p2p_userId || ""} />
   }
 
 
   return <div className=" w-full pl-5 pr-5">
 
+    {alertbox && <Alertbox label="Please enter an amount"/>}
+
+    {alertboxservererror && <Alertbox label="Sorry We are facing server issues please try again later"/>}
+
+    {alertboxselftransfer && <Alertbox label="Please Login to send money"/>}
+
 
 
     <div className="w-full border-b-2 border-neutral-800 h-40 flex flex-col ">
 
-      <div className="flex gap-3 items-center mt-6">
+      <div className="flex gap-3 items-center mt-6 ml-10 lg:ml-2">
 
         <motion.div 
           initial = {{opacity  : 0 }}
@@ -96,7 +123,7 @@ export const Paymoney = () => {
           transition={{duration : 0.6 , delay :0.2}}
         className="text-2xl text-neutral-200  p-2 ">
 
-          {"To : Parth's Slay Wallet"}
+          {`To : ${user_name} Slay Wallet`}
           {
             // Access this from the user you are sending money to store it in local storage when you click the user and retrieve it 
           }
@@ -108,7 +135,7 @@ export const Paymoney = () => {
       animate = {{opacity : 1 }}
       transition={{duration : 0.6 , delay :0.2}}className="mt-5">
 
-        <div className="text-lg lg:text-xl text-neutral-200 opacity-80 mt-30 pb-2  ">
+        <div className="text-lg lg:text-xl text-neutral-200 opacity-80 mt-30 pb-2  ml-10 lg:ml-2  ">
           <span className=""> From : </span>
           <span className="font-semibold">
 
@@ -119,7 +146,7 @@ export const Paymoney = () => {
       </motion.div>
     </div>
 
-    <div className="h-full w-full flex justify-center items-center lg:mt-20 ">
+    <div className="h-full w-full flex justify-center items-center mt-10 lg:mt-20 ">
 
     
     <motion.div initial = {{scale : 0.9 , opacity : 0 , y : 10}} 
@@ -157,6 +184,7 @@ export const Paymoney = () => {
         value={amount}
         onChange={(e) => {
           setAmount(parseInt(e.target.value))
+          setAlertbox(false)  
         }}
         placeholder="₹ 0"
         

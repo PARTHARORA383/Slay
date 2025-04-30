@@ -19,10 +19,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: "Missing fields" }, { status: 400 });
   }
 
+  if(session?.user.id != user1){
+    return NextResponse.json({
+      message : "User not authorised"
+    } , {status : 404})
+  }
 
   try {
+    if(user1 == user2){
+      return NextResponse.json({
+        message : "You cannot send money to yourself"
+      } , {status : 404})
+    }
 
-    const userbalance = await prisma.balance.findUnique({
+      const userbalance = await prisma.balance.findUnique({
       where:{userId : parseInt(user1)},
       select : {amount : true}
     })
@@ -36,7 +46,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({message : "Insufficient funds"} , {status : 400})
     }
 
-    await prisma.$transaction([
+   const Transaction =  await prisma.$transaction([
       prisma.balance.update({
         where: { userId: parseInt(user1) },
         data: {
@@ -53,13 +63,67 @@ export async function POST(req: NextRequest) {
           },
         },
       }),
+   
     ]);
 
-    return NextResponse.json({ message: "Transaction Successful!" }, { status: 200 });
+    if(Transaction){
+        
+    const response =  await prisma.p2PTransaction.create({
+        data : {
+          amount : parseInt(amount),
+          senderId : parseInt(user1) ,
+          receiverId : parseInt(user2) ,
+          status : "Success"
+        }
+      })
+      
+      
+      
+      return NextResponse.json({ message: "Transaction Successful!" , response }, { status: 200 });
+    }
 
   } catch (error) {
     console.error("Transaction error:", error);
 
     return NextResponse.json({ message: "Transaction Failed", error: String(error) }, { status: 500 });
   }
+}
+
+
+export async function GET(req : NextRequest){
+     
+  
+  const session =  await getServerSession(authOptions)
+
+  if(!session){
+    return NextResponse.json({message : "user not authenticated to fetch transactions"} , {status : 404})
+  }
+  try{
+    const userId = req.nextUrl.searchParams.get('userId');
+
+if(session?.user.id != userId){
+  return NextResponse.json({
+    message : "You cannot fetch someone else's transactions"
+  } , {status : 404})
+}
+    
+
+  const Transaction = await prisma.p2PTransaction.findMany({
+    where : {
+      OR : [
+        {senderId : parseInt(userId)} ,
+        {receiverId : parseInt(userId)}
+      ]
+    }
+  })
+
+  return NextResponse.json({
+    message : "Transaction list " , Transaction
+  } , {status : 200})
+
+  }catch(e){
+    return NextResponse.json({message : "Error fetching user" ,
+    } ,  {status : 500})
+  }
+
 }

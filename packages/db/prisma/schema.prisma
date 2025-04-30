@@ -13,24 +13,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model User{
-id Int @id @default(autoincrement())
-email String @unique
-name String
-password String  @default("defaultPassword") 
-  Balance           Balance[]
-    OnRampTransaction OnRampTransaction[]
-
+model User {
+  id                   Int                 @id @default(autoincrement())
+  email                String              @unique
+  name                 String
+  password             String              @default("defaultPassword")
+  Balance              Balance[]
+  OnRampTransaction    OnRampTransaction[]
+  sentTransactions     P2PTransaction[]    @relation("SentTransactions")
+  receivedTransactions P2PTransaction[]    @relation("ReceivedTransactions")
 }
 
-model Balance{
-
-id Int @id @default(autoincrement())
-userId Int  @unique 
-amount Int 
-locked Int 
-user   User @relation(fields: [userId], references: [id])
+model Balance {
+  id     Int  @id @default(autoincrement())
+  userId Int  @unique
+  amount Int
+  locked Int
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model OnRampTransaction {
@@ -44,25 +43,36 @@ model OnRampTransaction {
   user      User         @relation(fields: [userId], references: [id])
 }
 
+model P2PTransaction {
+  id        Int          @id @default(autoincrement())
+  status    OnRampStatus
+  amount    Int
+  startTime DateTime     @default(now())
+
+  senderId Int
+  sender   User @relation("SentTransactions", fields: [senderId], references: [id])
+
+  receiverId Int
+  receiver   User @relation("ReceivedTransactions", fields: [receiverId], references: [id])
+}
+
 model Bank_Account {
-  id Int @id @default(autoincrement())
-  UserId String
-  password String
-  bank_balance Int
-  Account_number Int@unique
+  id             Int                @id @default(autoincrement())
+  UserId         String
+  password       String
+  bank_balance   Int
+  Account_number Int                @unique
   transactions   Bank_transaction[]
 }
 
-
 model Bank_transaction {
-  id               Int    @id @default(autoincrement())
-  userId           String
-  accountNumber    Int
-  startTime DateTime 
-  status    OnRampStatus
-  bankAccount      Bank_Account @relation(fields: [accountNumber], references: [Account_number])
+  id            Int          @id @default(autoincrement())
+  userId        String
+  accountNumber Int
+  startTime     DateTime
+  status        OnRampStatus
+  bankAccount   Bank_Account @relation(fields: [accountNumber], references: [Account_number])
 }
-
 
 enum OnRampStatus {
   Success

@@ -81,7 +81,11 @@ export const PaymentComplete = ({
               exit={{opacity : 0 }}
               className="text-neutral-300 text-lg  hover:bg-neutral-900 bg-neutral-800 rounded-md  px-6 py-1.5 border-neutral-800 transition-transform duration-300"
               >
-               <span className="text-white font-medium">Check Balance</span>
+               <span className="text-white font-medium" 
+                onClick={()=>{
+                  setIsVisible(false)
+                  router.push('/transfer')
+                }}>Check Balance</span>
             </motion.button>
               </div>
           </motion.div>

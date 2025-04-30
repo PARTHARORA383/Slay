@@ -51,9 +51,9 @@ export const UserList = ()=>{
   )
 
   return <div  className="p-3">
-<div className="flex flex-col gap-2 mb-8">
-  <h1 className="text-2xl font-semibold text-white">Send Money Instantly</h1>
-  <p className="text-sm text-neutral-400">Select a user or search by name, email, or just scroll</p>
+<div className="flex flex-col gap-2 mb-8 ml-10 lg:ml-2 mt-5 lg:mt-0">
+  <h1 className="text-2xl font-semibold text-white ">Send Money Instantly</h1>
+  <p className=" text-sm text-neutral-400">Select a user or search by name, email, or just scroll</p>
 </div>
 <div className="mr-5 mb-5">
         <div className="relative w-full max-w-xl">
@@ -89,6 +89,7 @@ export const UserList = ()=>{
     
     {filteredusers.map((user)=>(
       <div className=" border-b-[1px] border-neutral-800 flex justify-between text-neutral-200 p-2.5 text-mde hover:bg-neutral-800 hover:bg-opacity-40 rounded-lg font-sans font-semibold bg-clip-border b-1 "  key={user.id } onClick={()=>{
+         localStorage.setItem("user_name" , user.name)
         router.push(`/Sendmoney/?userId=${user.id}`) 
      }}>
         <div className="flex gap-6">
@@ -104,6 +105,7 @@ export const UserList = ()=>{
         <div className="hidden lg:block pr-5 ">
 
           <button className="px-6 py-1.5 rounded-md hover:bg-gradient-to-b hover:opacity-80 bg-gradient-to-r from-neutral-800 to-neutral-900 " onClick={()=>{
+            localStorage.setItem("user_name" , user.name)
             router.push(`/Sendmoney/?userId=${user.id}`) 
          }}>Send Money</button>
         </div>

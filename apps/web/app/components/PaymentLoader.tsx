@@ -36,7 +36,7 @@ export default function PaymentLoader({
                 transition={{ duration: 15, ease: "easeInOut" }}
               >
                 <motion.div
-                  className="h-full w-full bg-neutral-700 p-3 rounded-full"
+                  className="h-full w-full bg-neutral-600 p-3 rounded-full"
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
@@ -105,7 +105,7 @@ export default function PaymentLoader({
                 transition={{ duration: 15 }}
               >
                 <motion.div
-                  className="h-full w-full bg-neutral-700 p-3 rounded-full"
+                  className="h-full w-full bg-neutral-600 p-3 rounded-full"
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0, opacity: 0 }}
@@ -121,7 +121,7 @@ export default function PaymentLoader({
 
             {/* Breathing gradient text */}
             <motion.div
-              className="text-xl font-semibold bg-gradient-to-br from-neutral-600 to-neutral-800 bg-clip-text text-transparent"
+              className="text-xl font-semibold bg-gradient-to-br from-neutral-400 to-neutral-600 bg-clip-text text-transparent"
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
