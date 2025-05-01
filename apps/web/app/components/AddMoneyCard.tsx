@@ -95,22 +95,25 @@ export  const AddMoney  = ({handleclick}:any)=> {
       
     return<div className=" max-w-screen p-5 lg:p-0 lg:max-w-4xl  lg:mt-10 z-10">
 
-    <Card title="Add Money">
+     
+    
+    <Card title=" ">
+
     {showloader && (
         <Loader label="Loading"/>
     )}
     {showalert && (
         <Alertbox label="Please Enter the amount and select bank provider"/>
     )}
-    <div className="w-full">
+    <div className="w-full px-6 py-6 lg lg:p-6">
         <TextInput label={"Amount"} placeholder={"Enter the amount"} type={"number"} onChange={(value) => {
             setAmount(value)
         }} />
     
-    <div className="mt-5 text-md">
+    <div className="mt-5 text-md ">
         Bank Provider
     </div>
-        <select className="w-full h-10 rounded-md text-gray-900 p-2.5"
+        <select className="w-full h-10 rounded-md text-gray-900 p-2.5 "
         onChange={(e)=>{
             setProvider(e.target.value)
         }} >

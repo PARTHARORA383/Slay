@@ -7,16 +7,19 @@ import { TransactionList } from "@/app/components/TransactionList.tsx";
 export default  function() {
 
     return <div className="lg:ml-[270px] lg:mr-[20px] ">
-        
-        <div className=" lg:pt-10 pt-6 text-3xl lg:text-4xl text-neutral-100 text-bold ml-14 lg:ml-2">Transfer</div>
-        <div className=" grid grid-cols-1 lg:grid-cols-3 lg:gap-4">
+        <div className="flex flex-col gap-1">
+
+        <div className=" lg:pt-10 pt-6 text-2xl lg:text-3xl text-neutral-100 font-semibold ml-14 lg:ml-2">Add Money</div>
+        <div className="  text-md lg:text-lg text-neutral-400 font-medium ml-14 lg:ml-2">Add Money to your slay wallet</div>
+        </div>
+        <div className=" grid grid-cols-1 lg:grid-cols-5 lg:gap-4">
     
-            <div className=" order-2 lg:order-1 col-span-3 lg:col-span-2">
+            <div className=" order-2 lg:order-1 col-span-3 lg:col-span-3">
 
             <AddMoney/>
             </div>
-            <div className=" order-1 lg:order-2 col-span-3 lg:col-span-1 flex flex-col ">
-                <div className="mt-10">
+            <div className=" order-1 lg:order-2 col-span-3 lg:col-span-2 flex flex-col ">
+                <div className="lg:mt-10">
 
                 <BalanceCard/>
                 </div>

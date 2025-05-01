@@ -53,6 +53,15 @@ return <div>
       P2P
       </h1>
     </div>
+    <div className= "max-w-full  ml-6 mr-6 p-3 " 
+    onClick={()=>{
+      router.replace("/B&H")
+      setIsVisible(false)
+    }}>
+     <h1 className="text-neutral-200 text-md hover:text-purple-500 cursor-pointer">
+      Balance & History
+      </h1>
+    </div>
     <div className= "max-w-full  ml-6 mr-6 p-3 ">
     <Logout/>
     </div>

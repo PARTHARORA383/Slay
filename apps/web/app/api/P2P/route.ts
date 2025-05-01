@@ -37,6 +37,13 @@ export async function POST(req: NextRequest) {
       select : {amount : true}
     })
 
+    const senderinfo = await prisma.user.findFirst({
+      where : {id : parseInt(user1)}
+    })
+    const receiverinfo = await prisma.user.findFirst({
+      where : {id : parseInt(user2)}
+    })
+    
 
      if (!userbalance) {
       return NextResponse.json({ message: "Balance not found for the user" }, { status: 404 });
@@ -72,7 +79,11 @@ export async function POST(req: NextRequest) {
         data : {
           amount : parseInt(amount),
           senderId : parseInt(user1) ,
+          senderName : senderinfo?.name,
+          senderEmail : senderinfo?.email,
           receiverId : parseInt(user2) ,
+          reciverName : receiverinfo?.name,
+          recieverEmail : receiverinfo?.email,
           status : "Success"
         }
       })

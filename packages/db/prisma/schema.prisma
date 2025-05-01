@@ -51,9 +51,13 @@ model P2PTransaction {
 
   senderId Int
   sender   User @relation("SentTransactions", fields: [senderId], references: [id])
+  senderName  String @default("")
+  senderEmail String  @default("")
 
   receiverId Int
   receiver   User @relation("ReceivedTransactions", fields: [receiverId], references: [id])
+  reciverName String     @default("")
+  recieverEmail   String  @default("")
 }
 
 model Bank_Account {

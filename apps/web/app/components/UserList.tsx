@@ -51,6 +51,7 @@ export const UserList = ()=>{
   )
 
   return <div  className="p-3">
+    
 <div className="flex flex-col gap-2 mb-8 ml-10 lg:ml-2 mt-5 lg:mt-0">
   <h1 className="text-2xl font-semibold text-white ">Send Money Instantly</h1>
   <p className=" text-sm text-neutral-400">Select a user or search by name, email, or just scroll</p>

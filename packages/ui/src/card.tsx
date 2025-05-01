@@ -18,14 +18,11 @@ export function Card({
       animate={{ opacity: 1, y: 0  , boxShadow: "0px 4px 10px rgba(139, 92, 246, 0.2)"}}
 
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="relative p-6 bg-gradient-to-br from-neutral-800 to-neutral-900  rounded-2xl shadow-lg border border-neutral-700" 
+      className="relative  bg-gradient-to-br from-neutral-800 to-neutral-900  rounded-2xl shadow-lg border border-neutral-800 border-[0.5px] min-h-full  " 
       onFocus={()=>setIsTyping(true)}
       onBlur={()=>setIsTyping(false)}>
         
-      <h1 className="text-xl font-semibold text-neutral-200 pb-3 border-b border-neutral-700">
-        {title}
-      </h1>
-      
+    
       <div className="mt-3 text-neutral-300">{children}</div>
     </motion.div>
   );
