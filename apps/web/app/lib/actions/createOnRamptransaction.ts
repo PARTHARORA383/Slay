@@ -4,7 +4,7 @@ import {prisma} from "@repo/db/client";
 
 
 
-export async function createOnRampTransaction(provider: string, amount: number , token : string) {
+export async function createOnRampTransaction(provider: string, amount: number , token : string ,userId : number) {
     // Ideally the token should come from the banking provider (hdfc/axis)
     console.log("🟢 Server Action Triggered: createOnRampTransaction"); // ✅ Debug log
 
@@ -15,7 +15,7 @@ export async function createOnRampTransaction(provider: string, amount: number ,
             status: "Processing",
             startTime: new Date(),
             token: token,
-            userId: Number("5"),
+            userId: Number(userId),
             amount: amount * 100
         }
     });

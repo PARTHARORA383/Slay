@@ -2,11 +2,12 @@
 
 import { Loader } from "@repo/ui/loader"
 import axios from "axios"
+import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 
 export function TransactionList() {
-
+  const {data : session  , status } = useSession()
   const [transactions, setTransactions] = useState([])
   const [filterTransactions, setFilterTransactions] = useState([])
   const [search, setSearch] = useState("")
@@ -28,11 +29,14 @@ export function TransactionList() {
   const fetchtransactions = async () => {
     try {
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/transactions`, {
-        params: { userId: '5' },
-      })
-      setTransactions(response.data.transactions)
-      console.log(response.data.transactions)
+      if(session?.user){
+
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/transactions`, {
+          params: { userId: session?.user.id },
+        })
+        setTransactions(response.data.transactions)
+        console.log(response.data.transactions)
+      }
     } catch (e) {
       alert("Server down please try agaain")
     }

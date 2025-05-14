@@ -27,8 +27,8 @@ const NetbankingPage = () => {
   };
 
   return (
-    <div className="h-screen w-screen bg-gradient-to-br from-blue-50 to-blue-100 p-4 grid grid-cols-2">
-      <div className="col-span-1 bg-white rounded-2xl shadow-2xl p-8 w-full">
+    <div className="h-screen w-screen bg-gradient-to-br from-blue-50 to-blue-100 lg:p-4 p-6 grid grid-cols-2">
+      <div className=" col-span-2 lg:col-span-1 bg-white rounded-2xl shadow-2xl p-8 ml-2  w-full">
         
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -42,10 +42,10 @@ const NetbankingPage = () => {
 
         {/* 🟡 Notice */}
         <div className="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 p-4 text-sm rounded-md mb-6">
-          <strong>Note:</strong> This is a mock NetBanking login page and not connected to any real bank. In real scenarios, you would use your official Customer ID and Password , Here Please Signup/login to create your bank account. 
-          <p className='font-bold'> P.S - Remember Your Login Credentials as you remember your bank credentials</p>
+          <strong>Note:</strong> This is a mock NetBanking login page and not connected to any real bank. In real scenarios, you would use your official Customer ID and Password 
+          <p className='font-bold'>Here Please Login using the same Email and Password you used on 
+          Slay app.</p>
       
-    
 
         </div>
 
@@ -59,7 +59,7 @@ const NetbankingPage = () => {
           <label className="text-md text-neutral-800">Customer ID / User ID</label>
           <input
             type="text"
-            className="h-10 shadow-lg rounded-md bg-neutral-100 w-2/3 outline-none mt-2 p-2.5 text-neutral-800"
+            className="h-10 shadow-lg rounded-md bg-neutral-100 lg:w-2/3 outline-none mt-2 p-2.5 text-neutral-800"
             placeholder="Enter your User ID"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -71,7 +71,7 @@ const NetbankingPage = () => {
           <label className="text-md text-neutral-800">Password</label>
           <input
             type="password"
-            className="h-10 shadow-lg rounded-md bg-neutral-100 w-2/3 outline-none mt-2 p-2.5 text-neutral-800"
+            className="h-10 shadow-lg rounded-md bg-neutral-100 lg:w-2/3 outline-none mt-2 p-2.5 text-neutral-800"
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -80,13 +80,13 @@ const NetbankingPage = () => {
 
         {/* Login Button */}
         <button onClick={handleclick}
-          className="bg-blue-700 rounded-md text-neutral-100 p-2.5 w-2/3 mt-8 hover:bg-blue-800 transition-transform duration-300"
+          className="bg-blue-700 rounded-md text-neutral-100 p-2.5 lg:w-2/3 mt-8 hover:bg-blue-800 transition-transform duration-300 w-full"
         >
           Login 
         </button>
     
       </div>
-      <div className="bg-gradient-to-br from-blue-400 to-blue-800 col-span-1 rounded-lg flex flex-col items-center justify-center text-white p-10 space-y-6">
+      <div className="hidden  bg-gradient-to-br from-blue-400 to-blue-800 col-span-1 rounded-lg lg:flex flex-col items-center justify-center text-white p-10 space-y-6">
   {/* SVG Icon */}
 
 

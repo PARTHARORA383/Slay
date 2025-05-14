@@ -10,18 +10,20 @@ import {Alertbox} from "@repo/ui/alert"
 import { createOnRampTransaction } from "../lib/actions/createOnRamptransaction.ts";
 import { useRouter } from "next/navigation.js";
 import {Loader} from "@repo/ui/loader"
+import { useSession } from "next-auth/react"
 
 
 
 
 
 export  const AddMoney  = ({handleclick}:any)=> {
+    const { data: session, status } = useSession()
     const [amount, setAmount] = useState("");
     const [provider, setProvider] = useState("");
     const[ details , setDetails] = useState(false);
     const[showalert , setShowAlert] = useState(false);
     const[showloader , setShowLoader] = useState(false);
-
+    const [id , setId] = useState("")
     const router = useRouter();
 
         useEffect(()=>{
@@ -31,39 +33,50 @@ export  const AddMoney  = ({handleclick}:any)=> {
                 setDetails(true)
             }
         } , [amount , provider])
-    
+
+
+        useEffect(()=>{
+            if(session?.user){
+
+                setId(session?.user.id);
+                console.log(" This is the user id "+session.user)
+            }
+
+        },[session?.user])
+        
 
     const handleonclick = ()=>{
-
+ 
+   
         try{
-    
-            if(details == false){
-                setShowAlert(true);
-            }
-            else{
-                setShowLoader(true);
-                const transaction_token = (Math.random() * 1000).toString();
-                localStorage.setItem("transaction_token" , transaction_token)
+       
+     
+          
 
-                setTimeout(() => {
+                 
+                 if(details == false){
+                     setShowAlert(true);
+                    }
+                    else{
+                        setShowLoader(true);
+                        const transaction_token = (Math.random() * 1000).toString();
+                        localStorage.setItem("transaction_token" , transaction_token)
+                        setTimeout(() => {
                 router.push('/redirecting')
                 setShowLoader(false);   
             }, 2000);
                 
+            
+            const form = document.createElement('form');
+            
+            
+            setTimeout(() => {
                 
-                const userId = '5';
-                
-                
-                
-                const form = document.createElement('form');
-                
-                setTimeout(() => {
-                    
-                    form.method = 'POST';
+                form.method = 'POST';
                     form.action = 'http://localhost:3001/api/transfer';    
                     
                     const inputs = [
-                    { name: 'userId', value: userId },
+                    { name: 'userId', value: id },
                     { name: 'transaction_token', value: transaction_token },
                     { name: 'amount', value: amount }
                 ];
@@ -80,14 +93,13 @@ export  const AddMoney  = ({handleclick}:any)=> {
                 form.submit();
                 
             }, 4000);
-            createOnRampTransaction(provider  , Number(amount) , transaction_token)
-
+            
+            
+            createOnRampTransaction(provider  , Number(amount) , transaction_token , Number(id))
+  
         }
 
     } catch(e){
-
-    }
-    finally{
 
     }
     }

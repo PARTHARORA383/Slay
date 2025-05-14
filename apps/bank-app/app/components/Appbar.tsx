@@ -17,12 +17,12 @@ export const Appbar = ({
     onSignin,
     onSignout
 }: AppbarProps) => {
-    return <div className="flex justify-between border-b px-4">
-        <div className="text-lg flex flex-col justify-center">
-            PayTM
+    return <div className="flex justify-between shadow-2xl  p-2 px-4">
+        <div className="text-lg font-semibold flex flex-col justify-center text-neutral-800 ml-3">
+            DummyBank
         </div>
-        <div className="flex flex-col justify-center pt-2">
-            <button onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</button>
+        <div className="flex flex-col justify-center pt-2  lg:mr-10 font-semibold text-lg">
+            <button  className = "hover:text-neutral-600 "onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"} </button>
         </div>
     </div>
 }

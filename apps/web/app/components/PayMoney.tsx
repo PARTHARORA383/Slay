@@ -98,7 +98,7 @@ export const Paymoney = () => {
 
     {alertboxservererror && <Alertbox label="Sorry We are facing server issues please try again later"/>}
 
-    {alertboxselftransfer && <Alertbox label="Please Login to send money"/>}
+    {alertboxselftransfer && <Alertbox label="Insufficient Balance"/>}
 
 
 

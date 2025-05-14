@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 import { motion } from 'motion/react'
 import { BalanceCard } from "./Balance.tsx"
+import { P2PTransaction_infocard } from "./P2Ptransaction_infocard.tsx"
 
 
 export const P2PTransactions = () => {
@@ -14,6 +15,9 @@ export const P2PTransactions = () => {
   const { data: session, status } = useSession()
   const [transactions, setTransactions] = useState([])
   const[search , setSearch] = useState('')
+  const [showtransactioninfo , setShowtransactoininfo] = useState(false);
+  const [selectedtransaction , setSelectedtransaction] = useState()
+
 
 
   const handlefetch = async () => {
@@ -22,7 +26,7 @@ export const P2PTransactions = () => {
 
       if (session?.user.id) {
 
-
+        console.log("this is the session user"  + session.user.id)
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/P2P`, { params: { userId: session?.user.id } })
         console.log(response.data)
         setTransactions(response.data.Transaction)
@@ -36,7 +40,6 @@ export const P2PTransactions = () => {
   useEffect(() => {
 
     if (session?.user.id) {
-
       handlefetch()
     }
 
@@ -49,7 +52,35 @@ export const P2PTransactions = () => {
     )
   })
 
+  const handleshowbalance = (transaction : any)=>{
+    setShowtransactoininfo(true);
+    setSelectedtransaction(transaction)
+    
+  }
+
+
+
+  
+
   return <div>
+
+{showtransactioninfo && selectedtransaction && (<div className="fixed inset-0 z-50">
+
+  
+<motion.div 
+ initial={{ opacity: 0, scale: 0.8, y: 50 }}
+ animate={{ opacity: 1, scale: 1, y: 0 }}
+ 
+ transition={{ duration: 0.5, ease: "easeOut" }}
+className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4 lg:right-[600px] font-semibold  sm:right-[200px] z-50 text-2xl cursor-pointer hover:text-red-400' onClick={()=>{
+  setShowtransactoininfo(false)
+}}> x</motion.div>
+
+
+  <P2PTransaction_infocard amount= {selectedtransaction.amount} senderName={selectedtransaction.senderName } senderEmail ={selectedtransaction.senderEmail || ""} recieverEmail= {selectedtransaction.recieverEmail || ""} recieverName={selectedtransaction.recieverName || ""} startTime={selectedtransaction.startTime}/>
+</div>)
+  }
+
 <div className="pt-8">
 
   <BalanceCard/>
@@ -90,7 +121,8 @@ export const P2PTransactions = () => {
     <div >
       {filteredtransactions.map((transaction) => (
         <motion.div
-          className="flex items-center p-1 gap-4" key={transaction.id}>
+          className="flex items-center p-1 gap-4" key={transaction.id} onClick= {()=>handleshowbalance(transaction)}
+          >
 
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neutral-600 to-neutral-900 text-neutral-100 flex justify-center items-center font-semibold ">
             {transaction.reciverName.toString().split("")[0]}
