@@ -48,12 +48,12 @@ import {prisma} from "@repo/db/client"
         })
     ]);
 
-    res.json({
+   return res.json({
         message: "Captured",
     })
 } catch(e) {
     console.error(e);
-    res.status(411).json({
+   return res.status(411).json({
      
         message: "Error while processing webhook"
     })

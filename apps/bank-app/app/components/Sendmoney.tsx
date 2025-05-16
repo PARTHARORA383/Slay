@@ -28,14 +28,14 @@ interface prop {
 
     try{
       setLoading(true)
-      const bank_confirm = await axios.post("http://localhost:3001/api/confirm" ,{
+      const bank_confirm = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/confirm`,{
         amount      ,
         account_number
       }
     )
     
     if(bank_confirm.status == 200){
-      const response = await axios.post("http://localhost:5000/bankWebhook" ,{
+      const response = await axios.post("https://slay-1.onrender.com" ,{
         userId ,
         token ,
         amount
@@ -47,7 +47,7 @@ interface prop {
       }
       setconfirmed(true);
       setTimeout(()=>{
-        window.location.href = "http://localhost:3000/B&H?refresh=true"
+        window.location.href = "https://slay-web-p1c7.vercel.app/B&H?refresh=true"
       },2000)
       
     }
