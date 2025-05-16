@@ -1,7 +1,7 @@
 import { prisma } from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcrypt";
-import Email from "next-auth/providers/email";
+
 
 export const authOptions = {
     providers: [
@@ -60,7 +60,8 @@ export const authOptions = {
                         balance : user.bank_balance
                 }
             } catch(e) {
-                console.error("Error authorizing user");
+              
+                console.error("Error authorizing user" + e);
             }
 
             return null

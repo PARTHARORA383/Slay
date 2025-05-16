@@ -41,6 +41,10 @@ interface prop {
         amount
       })
       setLoading(false)
+
+      if(response.status == 200){
+        console.log("recieved by slay webhook")
+      }
       setconfirmed(true);
       setTimeout(()=>{
         window.location.href = "http://localhost:3000/B&H?refresh=true"
@@ -49,7 +53,7 @@ interface prop {
     }
     
   }catch(e){
-    
+    console.log(e)
     alert("Payment failed. Please try again.");
   }
   finally{
