@@ -3,9 +3,9 @@ import axios from "axios"
 import { useState } from "react"
 
 interface prop {
-  amount : Number,
+  amount : number,
   account_number : string ,
-  userId : Number ,
+  userId : number ,
   token : string,
   CustomerId : string
 }
@@ -14,7 +14,7 @@ interface prop {
 
 
 
- export const SendMoney = ({amount , account_number  , userId , token ,CustomerId }:prop)=>{
+ export const SendMoney = ({amount , account_number  , userId , token  }:prop)=>{
 
   const [loading , setLoading] = useState(false)
   const [confirmed , setconfirmed] = useState(false)

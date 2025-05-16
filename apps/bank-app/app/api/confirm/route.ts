@@ -3,8 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/actions/auth";
 
+interface prop {
+  amount : string ,
+  account_number: string
+}
 
-export async function POST(req : NextRequest , res : NextResponse){
+export async function POST(req : NextRequest ){
 
 const session = await getServerSession(authOptions)
 
@@ -16,7 +20,7 @@ return NextResponse.json({
 
 
 
-const { CustomerId , amount , account_number} : any = await req.json()
+const {  amount , account_number } :prop  = await req.json()
 
 
 
@@ -41,7 +45,7 @@ try{
     } , {status : 401})
   }
 
-  if(finduser.bank_balance < amount){
+  if(finduser.bank_balance < Number(amount)){
     return NextResponse.json({
       message : "Low Balance"
     } ,{status : 400})
