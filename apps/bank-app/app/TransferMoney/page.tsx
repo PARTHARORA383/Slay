@@ -23,6 +23,7 @@ if(!session){
 
 
 const cookieStore = cookies();
+//@ts-ignore
 const txn = cookieStore.get('txn_session');
 
 
