@@ -1,12 +1,21 @@
 
 import { prisma } from "@repo/db/client"; 
-import { NextResponse } from "next/server.js";
+import { NextRequest, NextResponse } from "next/server.js";
 
 
 
-export async function GET(){
+export async function GET(req : NextRequest){
+ const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("userId");
+
 try{
-  const users = await prisma.user.findMany();
+  const users = await prisma.user.findMany({
+    where : {
+      id : {
+        not : Number(userId)
+      }
+    }
+  });
   
   return NextResponse.json({
     message : "user list"

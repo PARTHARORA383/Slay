@@ -2,6 +2,7 @@
 
 import { Button } from "@repo/ui/button"
 import axios from "axios"
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation.js"
 import { useEffect, useState } from "react"
 
@@ -19,12 +20,13 @@ export const UserList = ()=>{
   const [users , setUsers ] = useState([])
   const [search , setSearch ] = useState("")
   const router = useRouter()
+  const {data : session , status} = useSession()
 
   const handlefetchusers = async ()=>{
 
     try{
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users`)
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users?userId=${session?.user.id}`)
       setUsers(response.data.users);
      
     }catch(e){
@@ -35,7 +37,7 @@ export const UserList = ()=>{
 
     useEffect(()=>{
       handlefetchusers()
-    },[])
+    },[session])
     console.log(users)
     const handleSendMoney = ()=>{
       
