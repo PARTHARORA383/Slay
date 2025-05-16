@@ -93,7 +93,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
                 form.submit();
                 
             }, 4000);
-            
+            console.log("hello")
             
             createOnRampTransaction(provider  , Number(amount) , transaction_token , Number(id))
   
