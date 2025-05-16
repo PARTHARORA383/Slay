@@ -73,7 +73,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
             setTimeout(() => {
                 
                 form.method = 'POST';
-                    form.action = 'http://localhost:3001/api/transfer';    
+                    form.action = 'https://slay-bank-app-dog9.vercel.app/api/transfer';    
                     
                     const inputs = [
                     { name: 'userId', value: id },
