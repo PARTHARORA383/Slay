@@ -68,12 +68,13 @@ export  const AddMoney  = ({handleclick}:any)=> {
                 
             
             const form = document.createElement('form');
-            
-            
+            const url = process.env.NEXT_PUBLIC_BANK_URL
+
+            console.log(url)
             setTimeout(() => {
                 
                 form.method = 'POST';
-                    form.action = 'https://slay-bank-app-dog9.vercel.app/api/transfer';    
+                    form.action = `${url}/api/transfer`;    
                     
                     const inputs = [
                     { name: 'userId', value: id },
