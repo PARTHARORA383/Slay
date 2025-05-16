@@ -26,6 +26,10 @@ const cookieStore = cookies();
 const txn = cookieStore.get('txn_session');
 
 
+if (!txn || !txn.value) {
+ alert("transaction token is invalid")
+  redirect("/Auth/signin"); 
+}
 
 
   const { userId, amount, transaction_token } = JSON.parse(txn.value);
