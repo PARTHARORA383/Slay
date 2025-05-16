@@ -35,7 +35,7 @@ interface prop {
     )
     
     if(bank_confirm.status == 200){
-      const response = await axios.post("https://slay-1.onrender.com" ,{
+      const response = await axios.post("https://slay-1.onrender.com/bankWebhook" ,{
         userId ,
         token ,
         amount
