@@ -24,7 +24,7 @@ export const P2PTransactions = () => {
 
     try {
 
-      if (session?.user.id) {
+      if (session?.user.id ) {
 
         console.log("this is the session user"  + session.user.id)
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/P2P`, { params: { userId: session?.user.id } })
@@ -72,7 +72,7 @@ export const P2PTransactions = () => {
  animate={{ opacity: 1, scale: 1, y: 0 }}
  
  transition={{ duration: 0.5, ease: "easeOut" }}
-className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4 lg:right-[600px] font-semibold  sm:right-[200px] z-50 text-2xl cursor-pointer hover:text-red-400' onClick={()=>{
+className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4   lg:right-[600px] font-semibold -right-px z-50 text-2xl cursor-pointer hover:text-red-400' onClick={()=>{
   setShowtransactoininfo(false)
 }}> x</motion.div>
 
@@ -86,7 +86,7 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4 lg:right-[60
   <BalanceCard/>
 </div>
 
-<div className="mr-5 mb-5 pt-8">
+<div className=" ml-2 lg:ml-0 mr-5 mb-5 lg:pt-12 pt-4 ">
         <div className="relative w-full max-w-xl">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <svg
@@ -116,7 +116,7 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4 lg:right-[60
 
       </div>
       
-      <div className="text-lg font-semibold text-neutral-300  p-2.5 mb-3 w-full bg-gradient-to-br from-neutral-800 to-neutral-900 rounded-md">Payment history</div>
+      <div className="text-lg font-semibold text-neutral-300  p-2.5 bg-gradient-to-br from-neutral-800 to-neutral-900 ">Payment history</div>
 
     <div >
       {filteredtransactions.map((transaction) => (
@@ -130,14 +130,14 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4 lg:right-[60
 
 
 
-          <div className="flex justify-between border-b-[1px] border-neutral-800 w-full mr-3 lg:mr-6 hover:bg-neutral-800 rounded-md p-2 cursor-pointer transition-transform duration-300">
+          <div className="flex justify-between border-b-[1px] border-neutral-800 w-full mr-1 lg:mr-6 hover:bg-neutral-800 rounded-md p-2 cursor-pointer transition-transform duration-300">
             <div className="flex flex-col">
 
-            <div className="text-neutral-100 text-lg">
+            <div className="text-neutral-100 text-md">
               {transaction.reciverName.slice(0 , 5)}
             </div>
-            <div className="text-neutral-400 text-md ">
-             Paid on : {new Date(transaction.startTime).toLocaleString("en-GB", {
+            <div className="text-neutral-400 text-sm">
+              {new Date(transaction.startTime).toLocaleString("en-GB", {
     day: "2-digit",
     month: "long",
     hour: "2-digit",
@@ -148,7 +148,7 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4 lg:right-[60
             </div>
             <div className="flex flex-col items-end ">
 
-            <div className="text-lg font-semibold text-neutral-200">
+            <div className="text-md font-semibold text-neutral-200">
              + {transaction.amount}
             </div>
 

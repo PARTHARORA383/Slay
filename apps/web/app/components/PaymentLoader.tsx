@@ -15,7 +15,7 @@ export default function PaymentLoader({
   
 
   return (
-    <div className="flex flex-col items-center justify-center h-[700px] lg:h-screen  bg-neutral-900 text-white">
+    <div className="flex flex-col items-center justify-center h-[600px] lg:h-screen  bg-neutral-900 text-white">
       <AnimatePresence mode="wait">
         {isVisible && (
           <motion.div
@@ -121,7 +121,7 @@ export default function PaymentLoader({
 
             {/* Breathing gradient text */}
             <motion.div
-              className="text-xl font-semibold bg-gradient-to-br from-neutral-400 to-neutral-600 bg-clip-text text-transparent"
+              className=" text-lg lg:text-xl font-semibold bg-gradient-to-br from-neutral-400 to-neutral-600 bg-clip-text text-transparent"
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,

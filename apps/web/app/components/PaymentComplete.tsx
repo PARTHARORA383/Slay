@@ -18,7 +18,7 @@ export const PaymentComplete = ({
   const router = useRouter()
 
   return (
-    <div className="flex justify-center items-center h-[700px] lg:h-screen bg-neutral-900">
+    <div className="flex justify-center items-center h-[650px] lg:h-screen bg-neutral-900">
       <AnimatePresence>
         {isVisible && (
           <motion.div

@@ -41,7 +41,7 @@ return <div>
       setIsVisible(false)
     }}>
      <h1 className="text-neutral-200 text-md hover:text-purple-500 cursor-pointer">
-      Transfer Money
+       Netbanking
       </h1>
     </div>
     <div className= "max-w-full  ml-6 mr-6 p-3 " 
