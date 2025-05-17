@@ -41,14 +41,14 @@ if (!txn || !txn.value) {
 
     <div className="">
       <AppbarClient/>
-      <div className=" grid  grid-cols-2 lg:grid-cols-5  w-full ">
+      <div className=" grid  grid-cols-2 lg:grid-cols-5 w-full ">
         <div className=" col-span-2 lg:col-span-3 ">
           <div className="flex flex-col ">
             <div className="flex items-center gap-4 lg:gap-7 pl-8 pr-3 lg:ml-3 mt-10 ">
               <Card label="Balance" value={ session.user.balance} />
               <Card label="Account Number" value={session.user.Account_number} />
             </div>
-            <div className=" pl-8 pr-3  p-5 lg:pt-10 lg:pl-10  ">
+            <div className=" pl-8 pr-3  p-6 lg:pt-10 lg:pl-10  ">
               <SendMoney
           amount={amount}
           userId={userId}
