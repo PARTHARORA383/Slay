@@ -1,7 +1,13 @@
 import { prisma } from "@repo/db/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import { z } from "zod";
 
+
+const loginUser = z.object({
+  email : z.string().email(),
+  password : z.string().min(8)
+})
 
 export const authOptions = {
   providers: [
@@ -12,17 +18,23 @@ export const authOptions = {
         password: { label: "Password", type: "password", placeholder: "PassWxxxx" },
       },
       async authorize(credentials: any){
-        if (!credentials?.email || !credentials?.password) {
+
+        const parsed_input = loginUser.safeParse(credentials)
+
+        if (!parsed_input) {
           throw new Error("Email and Password are required");
         }
 
+
+         const {email , password } : any = parsed_input.data;
+
         const existingUser = await prisma.user.findFirst({
-          where: { email: credentials.email },
+          where: { email: email },
         });
 
         if (existingUser) {
           const passwordValidation = await bcrypt.compare(
-            credentials.password,
+            password,
             existingUser.password
           );
 
@@ -36,13 +48,15 @@ export const authOptions = {
         }
 
         try {
-          const hashedPassword = await bcrypt.hash(credentials.password, 10);
+          const hashedPassword = await bcrypt.hash(password, 10);
+
+
 
           const user = await prisma.user.create({
             data: {
-              email: credentials.email,
+              email: email,
               password: hashedPassword,
-              name: credentials.email,
+              name: email,
             },
           });
    

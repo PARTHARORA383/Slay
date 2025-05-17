@@ -49,14 +49,16 @@ model P2PTransaction {
   amount    Int
   startTime DateTime     @default(now())
 
+
   senderId Int
   sender   User @relation("SentTransactions", fields: [senderId], references: [id])
   senderName  String @default("")
   senderEmail String  @default("")
-
+  senderStatus String  @default("Sent")
   receiverId Int
   receiver   User @relation("ReceivedTransactions", fields: [receiverId], references: [id])
   reciverName String     @default("")
+  recieverStatus String  @default("Recieved")
   recieverEmail   String  @default("")
 }
 
@@ -83,3 +85,4 @@ enum OnRampStatus {
   Failure
   Processing
 }
+

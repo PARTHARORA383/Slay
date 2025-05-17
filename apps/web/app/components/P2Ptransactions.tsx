@@ -82,9 +82,10 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4   lg:right-[
   }
 
 <div className="pt-8">
-
-  <BalanceCard/>
+    <BalanceCard/>
 </div>
+
+
 
 <div className=" ml-2 lg:ml-0 mr-5 mb-5 lg:pt-12 pt-4 ">
         <div className="relative w-full max-w-xl">
@@ -119,13 +120,15 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4   lg:right-[
       <div className="text-lg font-semibold text-neutral-300  p-2.5 bg-gradient-to-br from-neutral-800 to-neutral-900 ">Payment history</div>
 
     <div >
-      {filteredtransactions.map((transaction) => (
+      {filteredtransactions
+      .sort((a, b) => new Date(b.startTime) - new Date(a.startTime))
+      .map((transaction) => (
         <motion.div
           className="flex items-center p-1 gap-4" key={transaction.id} onClick= {()=>handleshowbalance(transaction)}
           >
 
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neutral-600 to-neutral-900 text-neutral-100 flex justify-center items-center font-semibold ">
-            {transaction.reciverName.toString().split("")[0]}
+            { (session?.user.id == transaction.senderId) ? transaction.reciverName.toString().split("")[0] :transaction.senderName.toString().split("")[0] }
           </div>
 
 
@@ -133,8 +136,9 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4   lg:right-[
           <div className="flex justify-between border-b-[1px] border-neutral-800 w-full mr-1 lg:mr-6 hover:bg-neutral-800 rounded-md p-2 cursor-pointer transition-transform duration-300">
             <div className="flex flex-col">
 
-            <div className="text-neutral-100 text-md">
-              {transaction.reciverName.slice(0 , 5)}
+            <div className="text-neutral-100 lg:text-lg text-md">
+              {(session?.user.id == transaction.senderId) ? transaction.reciverName:
+              transaction.senderName}
             </div>
             <div className="text-neutral-400 text-sm">
               {new Date(transaction.startTime).toLocaleString("en-GB", {
@@ -148,11 +152,11 @@ className='w-8 h-8 bg-transparent text-neutral-200 absolute top-1/4   lg:right-[
             </div>
             <div className="flex flex-col items-end ">
 
-            <div className="text-md font-semibold text-neutral-200">
-             + {transaction.amount}
+            <div className="lg:text-lg text-md font-semibold text-neutral-200">
+              {(session?.user.id == transaction.senderId) ? "-" : "+"}   {transaction.amount}
             </div>
 
-            <div className="text-neutral-400 text-sm">Recieved</div>
+            <div className="text-neutral-400 text-sm">{(session?.user.id == transaction.senderId) ? "Sent" : "Recieved"}</div>
             </div>
 
           </div>
