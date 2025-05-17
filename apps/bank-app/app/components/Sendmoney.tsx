@@ -47,7 +47,7 @@ interface prop {
       }
       setconfirmed(true);
       setTimeout(()=>{
-        window.location.href = "https://slay-web-p1c7.vercel.app/B&H?refresh=true"
+        window.location.href = "https://slay-web-mu.vercel.app/B&H?refresh=true"
       },2000)
       
     }
