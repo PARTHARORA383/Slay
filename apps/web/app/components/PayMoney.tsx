@@ -102,7 +102,7 @@ export const Paymoney = () => {
 
 
 
-    <div className="w-full border-b-2 border-neutral-800 h-40 flex flex-col ">
+    <div className="w-full border-b-2 border-neutral-800 h-50 flex flex-col ">
 
       <div className="flex gap-3 items-center mt-6 ml-10 lg:ml-2">
 
@@ -110,7 +110,7 @@ export const Paymoney = () => {
           initial = {{opacity  : 0 }}
           animate = {{opacity : 1 }}
           transition={{duration : 0.6 , delay :0.2}}
-        className="w-14 h-14 rounded-full bg-gradient-to-tr from-neutral-700 to-neutral-900 text-neutral-200 flex justify-center items-center text-2xl">
+        className="w-14 h-14 rounded-full bg-gradient-to-tr from-neutral-700 to-neutral-900 text-neutral-200 flex justify-center items-center text-lg lg:text-2xl">
           {session?.user?.email?.toString().split("")[0]}
 
 
@@ -121,7 +121,7 @@ export const Paymoney = () => {
           initial = {{opacity  : 0 }}
           animate = {{opacity : 1 }}
           transition={{duration : 0.6 , delay :0.2}}
-        className="text-2xl text-neutral-200  p-2 ">
+        className="text-lg lg:text-2xl text-neutral-200  p-2 ">
 
           {`To : ${user_name} Slay Wallet`}
           {
@@ -135,7 +135,7 @@ export const Paymoney = () => {
       animate = {{opacity : 1 }}
       transition={{duration : 0.6 , delay :0.2}}className="mt-5">
 
-        <div className="text-lg lg:text-xl text-neutral-200 opacity-80 mt-30 pb-2  ml-10 lg:ml-2  ">
+        <div className="text-md lg:text-xl text-neutral-200 opacity-80 mt-30 pb-2  ml-10 lg:ml-2  ">
           <span className=""> From : </span>
           <span className="font-semibold">
 
@@ -155,7 +155,7 @@ export const Paymoney = () => {
       duration : 0.3,
       ease : 'easeIn'
     }}
-    className=" bg-gradient-to-br from-neutral-700 to-neutral-900 h-[450px] lg:h-[400px]  lg:w-[500px] p-10 rounded-md  ">
+    className=" bg-gradient-to-br from-neutral-700 to-neutral-900 h-[400px] lg:h-[400px]  lg:w-[500px] p-10 rounded-md  ">
 
     <div className="text-center">
 
