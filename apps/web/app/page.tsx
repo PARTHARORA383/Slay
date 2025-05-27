@@ -110,18 +110,18 @@ export default function Page() {
         initial = {{opacity : 0}}
       animate = {{opacity : 1}}
       transition={{duration : 0.6 , ease : 'easeIn'}}
-      className="border-[4px] rounded-3xl w-[350px] fixed bottom-5 left-5 md:left-auto md:right-20 lg:bottom-auto lg:left-auto  lg:top-28  lg:right-32  h-[400px] lg:h-[800px] translate-y-1/4 pl-6 pr-6 ml-4">
+      className="border-[4px] rounded-3xl hidden lg:block lg:fixed w-[280px] lg:w-[350px]  lg:bottom-auto lg:left-auto  lg:top-28  lg:right-32  h-[400px] lg:h-[800px] translate-y-1/4 pl-6 pr-6 ml-4">
 
         <motion.div
              initial = {{opacity : 0}}
       animate = {{opacity : 1}}
       transition={{duration : 0.8 , ease : 'easeIn'}}
-         className=" w-[150px] bg-neutral-300 mt-6 absolute left-24  h-5 lg:h-6 rounded-full">
+         className=" w-[100px] lg:w-[150px] bg-neutral-300 mt-6 absolute left-16 lg:left-24  h-5 lg:h-6 rounded-full">
         </motion.div>
 
         <motion.div>
         
-        <motion.div className=" h-[250px] bg-neutral-800 bg-opacity-80 mt-20 lg:mt-32 rounded-lg flex flex-col justify-start items-center">
+        <motion.div className=" lg:h-[250px] bg-neutral-800 bg-opacity-80 mt-20 lg:mt-32 rounded-lg flex flex-col justify-start items-center">
         <div className=" w-20 h-20 mt-10 rounded-full bg-neutral-300">  
 
         <img src="/image/anime-character-using-virtual-reality-glasses-metaverse.jpg" className="h-20 w-20 rounded-full"/>
