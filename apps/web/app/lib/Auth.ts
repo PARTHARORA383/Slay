@@ -64,7 +64,7 @@ export const authOptions = {
 
           const balance = await prisma.balance.create({
             data: {
-              amount : 0 ,
+              amount : 10000 ,
               userId : user.id ,
               locked : 0
             },

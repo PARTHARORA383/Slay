@@ -5,8 +5,6 @@ import { authOptions } from "@/app/lib/Auth.ts";
 
 export async function POST(req: NextRequest) {
   
-  
-  
   const session =  await getServerSession(authOptions)
 
   if(!session){

@@ -84,7 +84,7 @@ export const PaymentComplete = ({
                <span className="text-white font-medium" 
                 onClick={()=>{
                   setIsVisible(false)
-                  router.push('/transfer')
+                  router.push('/B&H')
                 }}>Check Balance</span>
             </motion.button>
               </div>
