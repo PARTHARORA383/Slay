@@ -6,7 +6,9 @@ export default function Balance_History (){
 
   return <div className="lg:ml-[270px]">
 
-
+      <div className="pt-8">
+      <BalanceCard />
+    </div>
     <P2PTransactions/>
 
   </div>

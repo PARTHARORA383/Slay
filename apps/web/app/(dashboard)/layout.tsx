@@ -7,6 +7,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
    <>
     <SessionAuth>
+
       <Sidebar />
       <main className="">{children}</main>
     </SessionAuth>

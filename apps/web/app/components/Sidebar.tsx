@@ -26,6 +26,9 @@ return <div>
   className= {`lg:block lg:fixed bg-neutral-900 lg:h-screen  border-r-2 border-neutral-800 w-[250px] lg:w-[250px] ${isVisible ? 
   ` transition-transform duration-300  fixed block z-20 h-screen` : "hidden"}`} >
 
+         <div className=" text-neutral-100  mt-8 ml-6 "> 
+        <img src = '/image/logo-removebg-preview.png' className="w-24 lg:w-28 "/>
+      </div>
     <div className= "max-w-full mt-20 ml-6 mr-6 p-3  " 
     onClick={()=>{
       router.replace("/Dashboard")
