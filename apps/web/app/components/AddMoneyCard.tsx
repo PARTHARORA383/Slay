@@ -106,7 +106,7 @@ export  const AddMoney  = ({handleclick}:any)=> {
     }
     
       
-    return<div className=" max-w-screen p-5 lg:p-0 lg:max-w-4xl  lg:mt-10 z-10">
+    return<div className="  max-w-screen p-5 lg:p-0 lg:max-w-4xl  lg:mt-10 z-10">
     <Card title=" ">
 
     {showloader && (

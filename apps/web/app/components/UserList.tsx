@@ -21,16 +21,20 @@ export const UserList = ()=>{
   const [search , setSearch ] = useState("")
   const router = useRouter()
   const {data : session , status} = useSession()
-
+  const [loading , setLoading] = useState(false);
+  
   const handlefetchusers = async ()=>{
 
     try{
-
+        setLoading(true);
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/users?userId=${session?.user.id}`)
       setUsers(response.data.users);
      
     }catch(e){
         console.log('error fetching data')
+    }
+    finally{
+      setLoading(true);
     }
 
   }
@@ -52,7 +56,18 @@ export const UserList = ()=>{
     }
   )
 
-  return <div  className="p-3">
+  if(!loading){
+
+    return <div className="fixed z-50 inset-0 bg-neutral-900 h-full w-full">
+      <div className="h-20  bg-gradient-to-br from-neutral-800 to-neutral-900 animate-pulse rounded-md"></div>
+    </div>
+  }
+
+  return <div  className="relative p-3">
+
+    {!loading && <div className="absolute z-50 inset-0 bg-neutral-900 h] ">
+      <div className="h-20  bg-gradient-to-br from-neutral-800 to-neutral-900 animate-pulse rounded-md"></div>
+    </div>}
     
 <div className="flex flex-col gap-2 mb-8 ml-10 lg:ml-2 mt-5 lg:mt-0">
   <h1 className="text-2xl font-semibold text-white ">Send Money Instantly</h1>

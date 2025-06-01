@@ -2,6 +2,7 @@
 
 import { BalanceCard } from "@/app/components/Balance.tsx"
 import { DashboardCard } from "@/app/components/DashboardCards.tsx"
+import { DashboardSkeleton } from "@/app/components/DashboardSkeleton.tsx"
 import { DashboardTransaction } from "@/app/components/DashboardTransaction.tsx"
 import { TransactionChart } from "@/app/components/LineChart.tsx"
 import { P2PTransactions } from "@/app/components/P2Ptransactions.tsx"
@@ -9,7 +10,6 @@ import { signIn, useSession } from "next-auth/react"
 import { useEffect } from "react"
 
 export default function Dashboard(){
-
   const {data : session , status} = useSession()
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -19,9 +19,10 @@ export default function Dashboard(){
       console.log("sesssion is  valid")
   }, [status])
 
-const transactions = [
- 3000 , 5000 , 8000 , 9000 , 10000 
-];
+
+if(status === "loading"){
+  return <DashboardSkeleton/>
+}
 
 return<>
 

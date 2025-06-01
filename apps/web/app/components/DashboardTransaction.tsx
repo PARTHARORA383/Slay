@@ -3,16 +3,17 @@ import { useSession } from "next-auth/react"
 import { useState, useEffect } from "react"
 import { motion } from 'motion/react'
 import axios from "axios"
+import { Loader } from "@repo/ui/loader"
 
 export const DashboardTransaction = () => {
   const { data: session, status } = useSession()
   const [transactions, setTransactions] = useState([])
-
+  const [loading , setLoading] = useState(false);
 
   const handlefetch = async () => {
 
     try {
-
+      setLoading(true);
       if (session?.user.id) {
 
         console.log("this is the session user" + session.user.id)
@@ -30,6 +31,9 @@ export const DashboardTransaction = () => {
     } catch (e) {
       alert("error fetching transaction , server down")
     }
+    finally{
+      setLoading(false);
+        }
   }
 
   useEffect(() => {
@@ -41,19 +45,24 @@ export const DashboardTransaction = () => {
   }, [session?.user.id])
 
 
+  
 
 
   return <>
 
-    <div >
-
       <div className=" flex justify-between items-center p-2.5 bg-gradient-to-br from-neutral-800 to-neutral-900 pl-5 pr-5">
-
         <div className="text-lg  text-neutral-300 "> Recent Transaction
         </div>
         <div className="text-lg  text-neutral-300 ">Pay More
         </div>
       </div>
+    <div className="relative" >
+
+      {loading && <div className="z-10 absolute inset-0  bg-neutral-900 transition-all duration-300 p-2">
+        <div className=" h-[350px] bg-gradient-to-br from-neutral-800 to-neutral-900 animate-pulse rounded-md"></div>
+       
+        </div>}
+
 
       {transactions.map((transaction) => (
         <motion.div
